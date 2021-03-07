@@ -3,11 +3,25 @@ const app = require('./server')
 
 
 describe('App',()=>{
-    it("returns plain text response",()=>{
-        supertest(app)
-        .get("/")
-        .set("User-Agent","mozilla")
-        .set("Accept","text/plain")
-        .expect(200)
-    })
+
+    let request
+ beforeEach(()=>{
+     request = supertest(app)
+     .get('/')
+     .set('User-Agent','mozilla')
+     .set('Accept','text/plain')
+ })
+
+ it("returns a hello world",(done)=>{
+     request
+     .expect((res)=>{
+         if(res.text!=="Hello world"){
+             throw new Error("Not sending hello world")
+         }
+         
+
+     })
+     .end(done)
+
+ })
 })
