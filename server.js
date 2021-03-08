@@ -4,11 +4,14 @@ const path = require('path')
 
 //config
 
-app.use('/hello',express.static('public'))
+
 
 //routes
 app.get("/",(req,res)=>{
     res.send("Hello world")
+})
+app.get("/hello",(req,res)=>{
+    res.sendFile(path.join(__dirname,"public","index.html"))
 })
 
 
