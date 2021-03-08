@@ -5,15 +5,12 @@ const app = require('./server')
 describe('App',()=>{
 
     let request
- beforeEach(()=>{
-     request = supertest(app)
-     .get('/')
-     .set('User-Agent','mozilla')
-     .set('Accept','text/plain')
- })
 
- it("returns a hello world",(done)=>{
-     request
+
+ it("returns a hello world text",(done)=>{
+     supertest(app)
+     .get('/')
+     .set('Accept','text/plain')
      .expect((res)=>{
          if(res.text!=="Hello world"){
              throw new Error("Not sending hello world")
@@ -24,4 +21,17 @@ describe('App',()=>{
      .end(done)
 
  })
+ it("returns a hello world html",(done)=>{
+     supertest(app)
+     .get("/hello")
+     .set("Accept","text/html")
+     .expect("Content-Type",/html/)
+     .expect((res)=>{
+         console.log(res.text)
+     })
+     .end(done)
+
+ })
+
+
 })

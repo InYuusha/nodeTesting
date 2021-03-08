@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
+const path = require('path')
 
 //config
 
+app.use('/hello',express.static('public'))
 
 //routes
-app.get('/',(req,res)=>{
-    res.send('Hello worl')
+app.get("/",(req,res)=>{
+    res.send("Hello world")
 })
 
 
